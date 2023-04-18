@@ -1,3 +1,0 @@
-C:/Users/aleks/Downloads/lab_05_graf/build/CMakeFiles/main.dir
-C:/Users/aleks/Downloads/lab_05_graf/build/CMakeFiles/edit_cache.dir
-C:/Users/aleks/Downloads/lab_05_graf/build/CMakeFiles/rebuild_cache.dir
