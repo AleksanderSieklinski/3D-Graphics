@@ -207,18 +207,6 @@ void GUIMyFrame1::Repaint() {
         auto m2 = m*p1;
         auto m3 = m*p2;
 
-        auto clipvalue=0.1f;
-        if((m2.GetZ() > clipvalue && m3.GetZ() <= clipvalue) || (m2.GetZ() <= clipvalue && m3.GetZ() > clipvalue)) {
-            Vector4 p3 = m3.GetZ() <= clipvalue ? p1 : p2;
-            Vector4 p4 = m3.GetZ() <= clipvalue ? p2 : p1;
-            double t = abs((clipvalue - p3.GetZ()) / (p4.GetZ() - p3.GetZ()));
-            p4.Set(p3.GetX() + t * (p4.GetX() - p3.GetX()), p3.GetY() + t * (p4.GetY() - p3.GetY()),clipvalue);
-            m2 = p3;
-            m3 = p4;
-        }
-        else if (m2.GetZ() <= clipvalue && m3.GetZ() <= clipvalue){
-            continue;
-        }
         Matrix4 m4 = Projection(90.f,sizex/sizey,0.1f,100.f);
 
         m2 = m4 * m2;
