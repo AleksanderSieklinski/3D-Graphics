@@ -143,15 +143,6 @@ Matrix4 Scale(Matrix4& m, double sx, double sy, double sz) {
     m.data[3][3] = 1;
     return m;
 }
-Matrix4 GetMatrix(Vector4 translation, Vector4 rotation, Vector4 scale) {
-    Matrix4 m;
-    m = Translate(m, translation.GetX(), translation.GetY(), translation.GetZ());
-    m = Scale(m, scale.GetX(), scale.GetY(), scale.GetZ());
-    m = m*RotateX(rotation.GetX());
-    m = m*RotateY(rotation.GetY());
-    m = m*RotateZ(rotation.GetZ());
-    return m;
-}
 
 Matrix4 Projection(double d,double wh,double a,double b) {
     Matrix4 m;
@@ -187,13 +178,12 @@ void GUIMyFrame1::Repaint() {
     double roty = WxSB_RotateY->GetValue();
     double rotz = WxSB_RotateZ->GetValue();
 
-    Vector4 Scalev,Translationv,Rotationv;
-
-    Scalev.Set(scalex, scaley, scalez);
-    Translationv.Set(-transx, transy, transz+1.1);
-    Rotationv.Set(rotx, roty, rotz);
-
-    Matrix4 m = GetMatrix(Translationv, Rotationv, Scalev);
+    Matrix4 m;
+    m = Translate(m,-transx, transy, transz+1.1);
+    m = Scale(m,scalex, scaley, scalez);
+    m = m*RotateX(rotx);
+    m = m*RotateY(roty);
+    m = m*RotateZ(rotz);
 
     for(const auto& segment : data) {
         Vector4 p1;
